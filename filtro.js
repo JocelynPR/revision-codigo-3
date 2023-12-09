@@ -1,4 +1,4 @@
-// Tenemos un li de productos
+// Tenemos una lista de productos
 
 const productos = [
   {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./taco-negro.jpg"},
@@ -8,56 +8,60 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+/* Cambie la declaración de variables a nombres más significativos 
+   Se cambió declaración var por let o const da
+*/
+const productsList = document.getElementById("lista-de-productos")  //se cambia el nombre de "li" por "productsList" para mayor claridad y se agrega getElementById
+const $input = document.getElementById('input');  //se cambia el nombre de "$i" por "$input" para mayor claridad y se agrega getElementById
 
 for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
+  const d = document.createElement("div")   //se cambia "var" por "const"
   d.classList.add("producto")
 
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
+  const ti = document.createElement("p")
+  ti.classList.add("titulo") // Agregue diseño a títutlo pues no se usaba en css
   ti.textContent = productos[i].nombre
-  
-  var imagen = document.createElement("img");
+
+  const imagen = document.createElement("img"); //se cambia "var" por "const"
   imagen.setAttribute('src', productos[i].img);
 
   d.appendChild(ti)
   d.appendChild(imagen)
 
-  li.appendChild(d)
+  productsList.appendChild(d) //se cambia el nombre de "li" por "productsList"
 }
 
-displayProductos(productos)
-const botonDeFiltro = document.querySelector("button");
+// "displayProductos(productos)" no se usa
 
-botonDeFiltro.onclick = function() {
-  while (li.firstChild) {
-    li.removeChild(li.firstChild);
+const botonDeFiltro = document.querySelector("button"); 
+
+botonDeFiltro.onclick = function () {
+  while (productsList.firstChild) {  //se cambia el nombre de "li" por "productsList"
+    productsList.removeChild(productsList.firstChild);  //se cambia el nombre de "li" por "productsList"
   }
 
-  const texto = $i.value;
+  const texto = $input.value;
   console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
-
+  const productosFiltrados = filtrado(productos, texto);  
   for (let i = 0; i < productosFiltrados.length; i++) {
-    var d = document.createElement("div")
+    const d = document.createElement("div")
     d.classList.add("producto")
-  
-    var ti = document.createElement("p")
+
+    const ti = document.createElement("p")
     ti.classList.add("titulo")
     ti.textContent = productosFiltrados[i].nombre
-    
-    var imagen = document.createElement("img");
+
+    const imagen = document.createElement("img");
     imagen.setAttribute('src', productosFiltrados[i].img);
-  
+
     d.appendChild(ti)
     d.appendChild(imagen)
-  
-    li.appendChild(d)
+
+    productsList.appendChild(d)   //se cambia el nombre de "li" por "productsList"
   }
 }
 
-const filtrado = (productos = [], texto) => {
+
+function filtrado(productos = [], texto) {  //se cambia "const" por "function"
   return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
 }  
